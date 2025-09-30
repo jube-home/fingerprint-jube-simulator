@@ -84,7 +84,7 @@ public class FingerprintController : Controller
 
     private static async Task<EventsGetResponse?> InvokeFingerprintApi(FingerprintRequest model)
     {
-        var configuration = new Configuration("phvNZ0vB10ELH7QQILLW")
+        var configuration = new Configuration(Environment.GetEnvironmentVariable("FINGERPRINT_API_KEY"))
         {
             Region = Region.Eu
         };
