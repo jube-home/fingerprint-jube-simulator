@@ -1,0 +1,46 @@
+select
+    1 as "CaseWorkflowId",
+    "Name" as "Name",
+    'payload.' || "Name" as "XPath",
+    1 as "Active",
+    now() as "CreatedDate",
+    'Administrator' as "CreatedUser",
+    1 as "Version",
+    '#000000' as "ConditionalFormatForeColor",
+    '#ffffff' as "ConditionalFormatBackColor",
+    '#000000' as "BoldLineFormatForeColor",
+    '#ffffff' as "BoldLineFormatBackColor",
+    gen_random_uuid()  as "Guid"
+from "EntityAnalysisModelRequestXpath" where "Name" like 'Fingerprint%';
+
+select
+    "EntityAnalysisModelId",
+    "Name",
+    "DataTypeId",
+    "XPath",
+    "Active",
+    "Locked",
+    "SearchKey",
+    "CreatedDate",
+    "CreatedUser",
+    "InheritedId",
+    1 as "Version",
+    "SearchKeyCache",
+    "SearchKeyCacheInterval",
+    "SearchKeyCacheValue",
+    "ResponsePayload",
+    "SearchKeyCacheTtlInterval",
+    "SearchKeyCacheTtlValue",
+    "PayloadLocationTypeId",
+    "SearchKeyCacheFetchLimit",
+    "ReportTable",
+    "SearchKeyCacheSample",
+    "DefaultValue",
+    "EnableSuppression",
+    gen_random_uuid() as "Guid",
+    "ImportId",
+    "SearchKeyTtlInterval",
+    "SearchKeyTtlIntervalValue",
+    "SearchKeyFetchLimit"
+from "EntityAnalysisModelRequestXpath"
+where "Name" like 'Fingerprint%'

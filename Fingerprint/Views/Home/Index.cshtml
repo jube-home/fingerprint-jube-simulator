@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Jube Web Transaction Simulator</h1>
+    <form>
+        <label for="AccountId">Account Id:</label><br>
+        <input type="text" id="AccountId" name="AccountId" value="Test1"><br>
+        <label for="Email">Email:</label><br>
+        <input type="text" id="Email" name="Email" value="test@test.com"><br>
+        <label for="CurrencyAmount">Currency Amount:</label><br>
+        <input type="text" id="CurrencyAmount" name="CurrencyAmount" value="123.45"><br>
+        <label for="BillingFirstName">Billing First Name:</label><br>
+        <input type="text" id="BillingFirstName" name="BillingFirstName" value="Robert"><br>
+        <label for="BillingLastName">Billing Last Name:</label><br>
+        <input type="text" id="BillingLastName" name="BillingLastName" value="Mugabe"><br>
+        <label for="CreditCardHash">Credit Card Hash:</label><br>
+        <input type="text" id="CreditCardHash" name="CreditCardHash" value="477596xxxxxx25"><br>
+        <br>
+        <button id="Submit" name="Submit">Submit</button>
+        <br>
+        <br>
+        <div id="Response" name="Response"></div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("Submit").addEventListener("click", function () {
+        event.preventDefault();
+
+        let accountId = $("#AccountId").val();
+        let creditCardHash = $("#CreditCardHash").val();
+        let email = $("#Email").val();
+        let billingFirstName = $("#BillingFirstName").val();
+        let billingLastName = $("#BillingLastName").val();
+        let currencyAmount = $("#CurrencyAmount").val();
+        
+        $.ajax({
+            url: 'api/Fingerprint',
+            type: 'POST',
+            data: JSON.stringify({
+                AccountId: accountId,
+                CreditCardHash: creditCardHash,
+                Email: email,
+                BillingFirstName: billingFirstName,
+                BillingLastName: billingLastName,
+                CurrencyAmount: currencyAmount,
+                FingerprintRequestId: fingerprintRequestId
+            }),
+            contentType: 'application/json',
+            processData: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.value > 0) {
+                    $("#Response").css("color", "red").text(result.content);
+                } else {
+                    $("#Response").css("color", "green").text('Approved.');
+                }
+            }
+        });
+    }, false);
+</script>
